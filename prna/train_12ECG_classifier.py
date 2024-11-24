@@ -103,7 +103,8 @@ def train_classifier(src_path, output_directory, tst_fold):
 
     if do_train:
         # for epoch in range(100): # original
-        for epoch in range(20):
+        # for epoch in range(20):
+        for epoch in range(2):
             trn_loss, trn_auroc = train(epoch, model, trnloader, optimizer)
             val_loss, val_auroc = validate(epoch, model, valloader, optimizer, fold_loc)
             write_log(fold_loc, tst_fold, epoch, trn_loss, trn_auroc, val_loss, val_auroc)
@@ -137,7 +138,7 @@ def train_classifier(src_path, output_directory, tst_fold):
         scores = []
         w = load_weights(weights_file, classes)
         for thr in np.arange(0., 1., step):
-            preds = (probs > thr).astype(np.int)
+            preds = (probs > thr).astype(np.int64)
             challenge_metric = compute_challenge_metric(w, lbls, preds, classes, normal_class)
             scores.append(challenge_metric)
         scores = np.array(scores)
@@ -145,7 +146,7 @@ def train_classifier(src_path, output_directory, tst_fold):
         # Best thrs and preds
         idxs = np.argmax(scores, axis=0)
         thrs = np.array([idxs*step])
-        preds = (probs > thrs).astype(np.int)
+        preds = (probs > thrs).astype(np.int64)
 
         # Save
         np.savetxt(str(fold_loc/'thrs.txt'), thrs)
@@ -153,7 +154,7 @@ def train_classifier(src_path, output_directory, tst_fold):
         np.savetxt(str(fold_loc/'feat_stds.txt'), feat_stds)
     else:
         thrs = np.loadtxt(str(fold_loc/'thrs.txt'))
-        preds = (probs > thrs).astype(np.int)
+        preds = (probs > thrs).astype(np.int64)
 
     print(thrs)
 
@@ -174,7 +175,7 @@ def train_classifier(src_path, output_directory, tst_fold):
 
     # Test
     probs, lbls = get_probs(model, tstloader)
-    preds = (probs > thrs).astype(np.int)
+    preds = (probs > thrs).astype(np.int64)
 
     f_beta_measure, g_beta_measure = compute_beta_measures(lbls, preds, beta)
     geom_mean = np.sqrt(f_beta_measure*g_beta_measure)
