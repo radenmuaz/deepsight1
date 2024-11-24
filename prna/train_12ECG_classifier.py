@@ -103,7 +103,7 @@ def train_classifier(src_path, output_directory, tst_fold):
 
     if do_train:
         # for epoch in range(100): # original
-        for epoch in range(10):
+        for epoch in range(20):
             trn_loss, trn_auroc = train(epoch, model, trnloader, optimizer)
             val_loss, val_auroc = validate(epoch, model, valloader, optimizer, fold_loc)
             write_log(fold_loc, tst_fold, epoch, trn_loss, trn_auroc, val_loss, val_auroc)

@@ -19,7 +19,7 @@ import torch.nn.functional as F
 debug = False
 patience = 10
 # batch_size = 128 * torch.cuda.device_count()
-batch_size = 128
+batch_size = 256
 window = 15*500
 dropout_rate = 0.2
 deepfeat_sz = 64
