@@ -1,0 +1,13 @@
+numpy
+joblib
+Cython
+pandas
+scipy
+scikit-learn
+torch
+wfdb
+biosppy
+tensorboardX
+tqdm
+pyentrp
+PyWavelets
