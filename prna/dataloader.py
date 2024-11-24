@@ -178,7 +178,6 @@ class ECGWindowPaddingDataset(Dataset):
                 if len(hdr) == 19:
                     break
         assert len(hdr) == 19
-        breakpoint()
         return ecg_segs, feats_normalized, lbl, hdr, filename        
 
 def load_challenge_data(header_file):
