@@ -127,7 +127,7 @@ def load_labels(label_files, normal_class, equivalent_classes_collection):
     num_classes = len(classes)
 
     # Use one-hot encoding for labels.
-    labels = np.zeros((num_recordings, num_classes), dtype=np.bool)
+    labels = np.zeros((num_recordings, num_classes), dtype=bool)
     for i in range(num_recordings):
         dxs = tmp_labels[i]
         for dx in dxs:
@@ -206,7 +206,7 @@ def load_outputs(output_files, normal_class, equivalent_classes_collection):
     num_classes = len(classes)
 
     # Use one-hot encoding for binary outputs and the same order for scalar outputs.
-    binary_outputs = np.zeros((num_recordings, num_classes), dtype=np.bool)
+    binary_outputs = np.zeros((num_recordings, num_classes), dtype=bool)
     scalar_outputs = np.zeros((num_recordings, num_classes), dtype=np.float64)
     for i in range(num_recordings):
         dxs = tmp_labels[i]
@@ -263,12 +263,12 @@ def organize_labels_outputs(label_classes, output_classes, tmp_labels, tmp_binar
     num_recordings = len(tmp_labels)
 
     # Rearrange the columns of the labels and the outputs to be consistent with the order of the classes.
-    labels = np.zeros((num_recordings, num_classes), dtype=np.bool)
+    labels = np.zeros((num_recordings, num_classes), dtype=bool)
     for k, dx in enumerate(label_classes):
         j = classes.index(dx)
         labels[:, j] = tmp_labels[:, k]
 
-    binary_outputs = np.zeros((num_recordings, num_classes), dtype=np.bool)
+    binary_outputs = np.zeros((num_recordings, num_classes), dtype=bool)
     scalar_outputs = np.zeros((num_recordings, num_classes), dtype=np.float64)
     for k, dx in enumerate(output_classes):
         j = classes.index(dx)
@@ -551,7 +551,7 @@ def compute_challenge_metric(weights, labels, outputs, classes, normal_class):
     correct_score = np.nansum(weights * A)
 
     # Compute the score for the model that always chooses the normal class.
-    inactive_outputs = np.zeros((num_recordings, num_classes), dtype=np.bool)
+    inactive_outputs = np.zeros((num_recordings, num_classes), dtype=bool)
     inactive_outputs[:, normal_index] = 1
     A = compute_modified_confusion_matrix(labels, inactive_outputs)
     inactive_score = np.nansum(weights * A)
