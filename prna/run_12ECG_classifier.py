@@ -109,11 +109,21 @@ def get_normalized_features(recording, feat_means, feat_stds):
     feature_names.remove('Gender_Male')
 
     # Get top (normalized) features (excludes signal duration and demo feats)
-    top_feats = feats[feature_names[:nb_feats]].values
+    top_feats = pd.DataFrame()
+    names = feature_names[:nb_feats]
+    # values = feats[names].values
+    # for k, v in zip(names, values):
+    #     top_feats[str(k)] = [v]
+    # import ipdb; ipdb.set_trace()
+    top_feats = feats[names].values
+    top_feats = np.concatenate([v[None] for v in feats[names].values])
     # First, convert any infs to nans
     top_feats[np.isinf(top_feats)] = np.nan
     # Replace NaNs with feature means
-    top_feats[np.isnan(top_feats)] = feat_means[None][np.isnan(top_feats)]
+    # top_feats[np.isnan(top_feats)] = np.where([np.isnan(top_feats), feat_means[None], top_feats])
+    top_feats[np.isnan(top_feats)] = feat_means[np.isnan(top_feats)]
+    top_feats = top_feats[None]
+    # top_feats[np.isnan(top_feats)] = feat_means[None][np.isnan(top_feats)]
     # Normalize wide features
     feats_normalized = (top_feats - feat_means) / feat_stds
     # Use zeros (normalized mean) if cannot find patient features
@@ -172,7 +182,7 @@ def predict(models, thrs, inp_windows_t, feats_t, hdr, device=device):
     
     return probs, preds
 
-def load_12ECG_model(model_dir):
+def load_12ECG_model(model_dir, device="cuda"):
     # load the model from disk
     model = CTN(d_model, nhead, d_ff, num_layers, dropout_rate, deepfeat_sz, nb_feats, nb_demo, classes).to(device)
     # model = torch.nn.DataParallel(model, device_ids=range(torch.cuda.device_count()))
@@ -184,14 +194,14 @@ def load_12ECG_model(model_dir):
     # Get ensemble model and their thrs
     models, thrs = {}, {}
     for fold in folds:
-        models[fold] = load_best_model(model, f'{model_dir}/saved_models/{model_name}/fold_{fold}/{model_name}.tar')
+        models[fold] = load_best_model(model, f'{model_dir}/saved_models/{model_name}/fold_{fold}/{model_name}.tar', device=device)
         thrs[fold] = np.loadtxt(f'{model_dir}/saved_models/{model_name}/fold_{fold}/thrs.txt')
         
     loaded_model = {'models' : models, 'thrs' : thrs, 'feat_means' : feat_means, 'feat_stds' : feat_stds}
     return loaded_model
 
-def load_best_model(model, model_loc):
-    checkpoint = torch.load(model_loc)
+def load_best_model(model, model_loc, device="cuda"):
+    checkpoint = torch.load(model_loc, map_location=device)
     model.load_state_dict(checkpoint['model_state_dict'])
     return model    
 

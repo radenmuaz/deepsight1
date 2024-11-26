@@ -94,8 +94,8 @@ class Features:
                                     polarity_check, template_before, template_after)
 
         # Get features
-        self.features = self.features.append(
-            self._group_features(
+        # self.features = self.features.append(
+        self.features =  self._group_features(
                 file_name='',
                 ts=ts,
                 signal_raw=signal_raw,
@@ -105,9 +105,7 @@ class Features:
                 templates=templates,
                 template_before=template_before,
                 template_after=template_after
-            ),
-            ignore_index=True
-        )
+                )
 
     def _preprocess_signal(self, signal_raw, filter_bandwidth, normalize,
                            polarity_check, template_before, template_after):

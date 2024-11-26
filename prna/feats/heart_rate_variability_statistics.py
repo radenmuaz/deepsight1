@@ -521,7 +521,7 @@ class HeartRateVariabilityStatistics:
             heart_rate_statistics['heart_rate_multiscale_entropy' + suffix] = \
                 self.safe_check(ent.multiscale_entropy(heart_rate, sample_length=2, tolerance=0.1*np.std(heart_rate))[0])
             heart_rate_statistics['heart_rate_permutation_entropy' + suffix] = \
-                self.safe_check(ent.permutation_entropy(heart_rate, m=2, delay=1))
+                self.safe_check(ent.permutation_entropy(heart_rate, order=2, delay=1))
             heart_rate_statistics['heart_rate_multiscale_permutation_entropy' + suffix] = \
                 self.safe_check(ent.multiscale_permutation_entropy(heart_rate, m=2, delay=1, scale=1)[0])
             heart_rate_statistics['heart_rate_fisher_info' + suffix] = fisher_info(heart_rate, tau=1, de=2)
@@ -681,7 +681,7 @@ class HeartRateVariabilityStatistics:
             rri_nonlinear_statistics['rri_multiscale_entropy' + suffix] = \
                 self.safe_check(ent.multiscale_entropy(rri, sample_length=2, tolerance=0.1*np.std(rri))[0])
             rri_nonlinear_statistics['rri_permutation_entropy' + suffix] = \
-                self.safe_check(ent.permutation_entropy(rri, m=2, delay=1))
+                self.safe_check(ent.permutation_entropy(rri, order=2, delay=1))
             rri_nonlinear_statistics['rri_multiscale_permutation_entropy' + suffix] = \
                 self.safe_check(ent.multiscale_permutation_entropy(rri, m=2, delay=1, scale=1)[0])
             rri_nonlinear_statistics['rri_fisher_info' + suffix] = fisher_info(rri, tau=1, de=2)
@@ -715,7 +715,7 @@ class HeartRateVariabilityStatistics:
             rri_nonlinear_statistics['diff_rri_multiscale_entropy' + suffix] = \
                 self.safe_check(ent.multiscale_entropy(diff_rri, sample_length=2, tolerance=0.1*np.std(rri))[0])
             rri_nonlinear_statistics['diff_rri_permutation_entropy' + suffix] = \
-                self.safe_check(ent.permutation_entropy(diff_rri, m=2, delay=1))
+                self.safe_check(ent.permutation_entropy(diff_rri, order=2, delay=1))
             rri_nonlinear_statistics['diff_rri_multiscale_permutation_entropy' + suffix] = \
                 self.safe_check(ent.multiscale_permutation_entropy(diff_rri, m=2, delay=1, scale=1)[0])
             rri_nonlinear_statistics['diff_rri_fisher_info' + suffix] = fisher_info(diff_rri, tau=1, de=2)
@@ -751,7 +751,7 @@ class HeartRateVariabilityStatistics:
             rri_nonlinear_statistics['diff2_rri_multiscale_entropy' + suffix] = \
                 self.safe_check(ent.multiscale_entropy(diff2_rri, sample_length=2, tolerance=0.1*np.std(rri))[0])
             rri_nonlinear_statistics['diff2_rri_permutation_entropy' + suffix] = \
-                self.safe_check(ent.permutation_entropy(diff2_rri, m=2, delay=1))
+                self.safe_check(ent.permutation_entropy(diff2_rri, order=2, delay=1))
             rri_nonlinear_statistics['diff2_rri_multiscale_permutation_entropy' + suffix] = \
                 self.safe_check(ent.multiscale_permutation_entropy(diff2_rri, m=2, delay=1, scale=1)[0])
             rri_nonlinear_statistics['diff2_rri_fisher_info' + suffix] = fisher_info(diff2_rri, tau=1, de=2)

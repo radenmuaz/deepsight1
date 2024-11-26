@@ -3,7 +3,7 @@
 import numpy as np, os, sys
 from scipy.io import loadmat
 from run_12ECG_classifier import load_12ECG_model, run_12ECG_classifier
-
+from tqdm import tqdm
 def load_challenge_data(filename):
 
     x = loadmat(filename)
@@ -56,14 +56,12 @@ if __name__ == '__main__':
 
     # Load model.
     print('Loading 12ECG model...')
-    # model = load_12ECG_model(model_input, device="cuda")
-    model = load_12ECG_model(model_input, device="cpu")
+    model = load_12ECG_model(model_input)
 
     # Iterate over files.
-    print('Extracting 12ECG features...')
     num_files = len(input_files)
 
-    for i, f in enumerate(input_files):
+    for i, f in tqdm(enumerate(input_files)):
         print('    {}/{}...'.format(i+1, num_files))
         tmp_input_file = os.path.join(input_directory,f)
         data,header_data = load_challenge_data(tmp_input_file)

@@ -366,7 +366,7 @@ def spectral_entropy(a, sampling_freq, bands=None):
         bands = np.asarray(bands)
 
         freq_limits_low = np.concatenate([[0.0], bands])
-        freq_limits_up = np.concatenate([bands, [np.Inf]])
+        freq_limits_up = np.concatenate([bands, [np.inf]])
 
         power_per_band = np.asarray([
             np.sum(psd[np.bitwise_and(freqs >= low, freqs < up)]) for low, up in zip(freq_limits_low, freq_limits_up)

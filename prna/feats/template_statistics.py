@@ -590,7 +590,7 @@ class TemplateStatistics:
             self.safe_check(
                 ent.permutation_entropy(
                     self.templates_good[0:start_sp, col],
-                    m=2, delay=1
+                    order=2, delay=1
                 )
             )
             for col in range(self.templates_good.shape[1])
@@ -744,7 +744,7 @@ class TemplateStatistics:
             self.safe_check(
                 ent.permutation_entropy(
                     self.templates_good[end_sp:, col],
-                    m=2, delay=1
+                    order=2, delay=1
                 )
             )
             for col in range(self.templates_good.shape[1])
@@ -985,7 +985,7 @@ class TemplateStatistics:
                     ent.multiscale_entropy(rpeak_amplitudes, sample_length=2, tolerance=0.1*np.std(rpeak_amplitudes))[0]
                 )
             r_peak_amplitude_statistics['rpeak_permutation_entropy'] = \
-                self.safe_check(ent.permutation_entropy(rpeak_amplitudes, m=2, delay=1))
+                self.safe_check(ent.permutation_entropy(rpeak_amplitudes, order=2, delay=1))
             r_peak_amplitude_statistics['rpeak_multiscale_permutation_entropy'] = \
                 self.safe_check(ent.multiscale_permutation_entropy(rpeak_amplitudes, m=2, delay=1, scale=1)[0])
             r_peak_amplitude_statistics['rpeak_fisher_info'] = fisher_info(rpeak_amplitudes, tau=1, de=2)
