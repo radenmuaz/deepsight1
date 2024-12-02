@@ -43,12 +43,8 @@ The authors set training global variables in `utils.py`, to eval only, set `do_t
 tensorboard --logdir ~/prna_train_out
 ```
 
-# Eval with ensemble
+# infer .hea files
 
-For eval, the author managed to get higher score with ensembles.
-Not practical if want to have faster inference.
-
-Global variables are in `run_12ECG_classifier.py`
 ```
-python driver.py train_out/saved_models/ctn eval_out
+python driver.py ~/prna_train_out folder_containing_hea_files output_folder
 ```
