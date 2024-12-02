@@ -24,7 +24,7 @@ def parse_args():
     # basic parameters
     parser.add_argument('--model_name', type=str, default='seresnet18_1d', help='the name of the model')
     parser.add_argument('--data_name', type=str, default='ECG', help='the name of the data')
-    parser.add_argument('--data_dir', type=str, default='./', help='the directory of the data')
+    parser.add_argument('--data_dir', type=str, default='/Users/muaz/physionet_data/all_data', help='the directory of the data')
     parser.add_argument('--split', type=str, default='0', help='The number of split')
     parser.add_argument('--monitor_acc', type=str, default='ecgAcc', help='the directory of the data')
 #    parser.add_argument('--label_dir', type=str, default='/Users/michael', help='the directory of the labels')
@@ -48,7 +48,7 @@ def parse_args():
 
     # save, load and display information
     parser.add_argument('--load_model', type=str, default=None, help='the directory of the resume training model')
-    parser.add_argument('--max_epoch', type=int, default=70, help='max number of epoch')
+    parser.add_argument('--max_epoch', type=int, default=2, help='max number of epoch')
     parser.add_argument('--print_step', type=int, default=100, help='the interval of log training information')
 
     args = parser.parse_args()

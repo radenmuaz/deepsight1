@@ -5,7 +5,7 @@ import torch
 from torch.utils.data import Dataset
 from scipy.io import loadmat
 import numpy as np
-
+import os
 def Resample(input_signal, src_fs, tar_fs):
     '''
     :param input_signal:输入信号
@@ -18,7 +18,8 @@ def Resample(input_signal, src_fs, tar_fs):
         audio_len = input_signal.shape[1]
         audio_time_max = 1.0 * (audio_len) / src_fs
         src_time = 1.0 * np.linspace(0, audio_len, audio_len) / src_fs
-        tar_time = 1.0 * np.linspace(0, np.int(audio_time_max * tar_fs), np.int(audio_time_max * tar_fs)) / tar_fs
+        tar_time = 1.0 * np.linspace(0, np.array(int(audio_time_max * tar_fs)), 
+                                     np.array(int(audio_time_max * tar_fs))) // tar_fs
         for i in range(input_signal.shape[0]):
             if i == 0:
                 output_signal = np.interp(tar_time, src_time, input_signal[i, :]).astype(dtype)
@@ -62,13 +63,13 @@ class dataset(Dataset):
         if self.test:
             img_path = self.data[item]
             fs = self.fs[item]
-            img = self.loader(self.data_dir + img_path, src_fs=fs)
+            img = self.loader(os.path.join(self.data_dir,img_path), src_fs=fs)
             img = self.transforms(img)
             return img, img_path
         else:
             img_name = self.data[item]
             fs = self.fs[item]
-            img = self.loader(img_name, src_fs=fs)
+            img = self.loader(os.path.join(self.data_dir, img_name), src_fs=fs)
             label = self.multi_labels[item]
             """
             for i in range(img.shape[1]):
