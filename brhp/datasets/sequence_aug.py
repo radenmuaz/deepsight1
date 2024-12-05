@@ -247,8 +247,7 @@ class ValClip(object):
         self.len = len
 
     def __call__(self, seq):
-        if seq.shape[1] >= self.len:
-            breakpoint()
+        if seq.shape[1] > self.len:
             seq = seq[:,:self.len]
             # seq = seq
         else:
