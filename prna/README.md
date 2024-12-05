@@ -43,8 +43,9 @@ The authors set training global variables in `utils.py`, to eval only, set `do_t
 tensorboard --logdir ~/prna_train_out
 ```
 
-# infer .hea files
-
+# infer with .mat .hea files
+A ecg recording data must be as two files of same name, e.g. `example.mat` and `example.hea`,
+put .mat .hea in a folder, e.g. `folder_containing_hea_files`
 ```
 python driver.py ~/prna_train_out folder_containing_hea_files output_folder
 ```
