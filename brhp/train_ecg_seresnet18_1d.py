@@ -32,7 +32,7 @@ def parse_args():
     parser.add_argument('--checkpoint_dir', type=str, default='./checkpoint_seresnet18_clip_weighted_1d_split0',
                         help='the directory to save the model')
 #    parser.add_argument("--pretrained", type=bool, default=True, help='whether to load the pretrained model')
-    parser.add_argument('--batch_size', type=int, default=64, help='batchsize of the training process')
+    parser.add_argument('--batch_size', type=int, default=128, help='batchsize of the training process')
     parser.add_argument('--num_workers', type=int, default=0, help='the number of training process')
 
     # optimization information
@@ -48,7 +48,7 @@ def parse_args():
 
     # save, load and display information
     parser.add_argument('--load_model', type=str, default=None, help='the directory of the resume training model')
-    parser.add_argument('--max_epoch', type=int, default=2, help='max number of epoch')
+    parser.add_argument('--max_epoch', type=int, default=50, help='max number of epoch')
     parser.add_argument('--print_step', type=int, default=100, help='the interval of log training information')
 
     args = parser.parse_args()
