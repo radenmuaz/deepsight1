@@ -32,7 +32,7 @@ def parse_args():
     parser.add_argument('--checkpoint_dir', type=str, default='/content/drive/MyDrive/brhp_train_out',
                         help='the directory to save the model')
 #    parser.add_argument("--pretrained", type=bool, default=True, help='whether to load the pretrained model')
-    parser.add_argument('--batch_size', type=int, default=128, help='batchsize of the training process')
+    parser.add_argument('--batch_size', type=int, default=64, help='batchsize of the training process')
     parser.add_argument('--num_workers', type=int, default=0, help='the number of training process')
 
     # optimization information
