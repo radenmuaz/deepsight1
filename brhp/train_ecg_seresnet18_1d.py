@@ -24,12 +24,12 @@ def parse_args():
     # basic parameters
     parser.add_argument('--model_name', type=str, default='seresnet18_1d', help='the name of the model')
     parser.add_argument('--data_name', type=str, default='ECG', help='the name of the data')
-    parser.add_argument('--data_dir', type=str, default='/Users/muaz/physionet_data/all_data', help='the directory of the data')
+    parser.add_argument('--data_dir', type=str, default='/content/all_data', help='the directory of the data')
     parser.add_argument('--split', type=str, default='0', help='The number of split')
     parser.add_argument('--monitor_acc', type=str, default='ecgAcc', help='the directory of the data')
 #    parser.add_argument('--label_dir', type=str, default='/Users/michael', help='the directory of the labels')
     parser.add_argument('--cuda_device', type=str, default='0', help='assign device')
-    parser.add_argument('--checkpoint_dir', type=str, default='./checkpoint_seresnet18_clip_weighted_1d_split0',
+    parser.add_argument('--checkpoint_dir', type=str, default='/content/drive/MyDrive/brhp_train_out',
                         help='the directory to save the model')
 #    parser.add_argument("--pretrained", type=bool, default=True, help='whether to load the pretrained model')
     parser.add_argument('--batch_size', type=int, default=128, help='batchsize of the training process')
