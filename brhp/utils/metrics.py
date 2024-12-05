@@ -8,7 +8,7 @@ import pandas as pd
 
 #计算F1score
 def cal_Acc(y_true, y_pre, threshold=0.5, num_classes=9, beta=2, normal=False):
-    y_true = y_true.cpu().detach().numpy().astype(np.int)
+    y_true = y_true.cpu().detach().numpy().astype(np.int64)
 
     y_label = np.zeros(y_true.shape)
     # Generate the one hot encoding labels
