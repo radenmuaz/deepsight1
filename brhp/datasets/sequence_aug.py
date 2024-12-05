@@ -248,7 +248,9 @@ class ValClip(object):
 
     def __call__(self, seq):
         if seq.shape[1] >= self.len:
-            seq = seq
+            breakpoint()
+            seq = seq[:,:self.len]
+            # seq = seq
         else:
             zeros_padding = np.zeros(shape=(seq.shape[0], self.len - seq.shape[1]), dtype=np.float32)
             seq = np.hstack((seq, zeros_padding))

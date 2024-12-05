@@ -57,8 +57,7 @@ class dataset(Dataset):
 
 
     def __len__(self):
-        return len(self.data) - 1
-        # return len(self.data)
+        return len(self.data)
 
     def __getitem__(self, item):
         if self.test:
